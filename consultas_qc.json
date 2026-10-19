@@ -33,5 +33,14 @@
   "where": "fecha_de_firma >= '2022-01-01T00:00:00' AND valor_del_contrato >= 1000000000 AND ((valor_del_contrato IS NULL OR valor_del_contrato <= 0) OR (modalidad_de_contratacion = 'Mínima cuantía' AND valor_del_contrato > 200000000) OR (valor_del_contrato >= 10000000000000) OR (valor_del_contrato >= 100000000000 AND (upper(objeto_del_contrato) like '%SERVICIOS PROFESIONALES%' OR upper(objeto_del_contrato) like '%APOYO A LA GESTI%')) OR (valor_del_contrato >= 100000000000 AND valor_facturado > 0 AND valor_del_contrato > valor_facturado * 500))",
   "order": "valor_del_contrato DESC",
   "limit": 20000
+ },
+ {
+  "nombre": "radar_ed1_entidades_enero",
+  "producto": "Radar de contratación ed. 1",
+  "id": "jbjy-vk9h",
+  "select": "date_extract_y(fecha_de_firma) AS anio, nombre_entidad, nit_entidad, orden, departamento, count(*) AS contratos",
+  "where": "date_extract_m(fecha_de_firma) = 1 AND fecha_de_firma >= '2025-01-01T00:00:00' AND upper(modalidad_de_contratacion) like '%DIRECTA%'",
+  "group": "anio, nombre_entidad, nit_entidad, orden, departamento",
+  "limit": 200000
  }
 ]
