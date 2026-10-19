@@ -40,20 +40,32 @@ REINTENTOS = 3
 TIMEOUT = int(os.environ.get("SOCRATA_TIMEOUT", "90"))  # segundos por petición
 
 
+_TOKEN_INVALIDO = False
+
+
 def _get(url, params=None):
     if params:
         url = url + "?" + urllib.parse.urlencode(params, safe="$:,")
     headers = {"User-Agent": "IpG-Observatorio/0.1"}
+    global _TOKEN_INVALIDO
     token = os.environ.get("SOCRATA_APP_TOKEN")
-    if token:
+    if token and not _TOKEN_INVALIDO:
         headers["X-App-Token"] = token
     for intento in range(REINTENTOS):
         try:
             with urllib.request.urlopen(urllib.request.Request(url, headers=headers), timeout=TIMEOUT) as r:
                 return r.read()
         except urllib.error.HTTPError as e:
+            cuerpo = e.read()[:300]
+            if e.code == 403 and b"app_token" in cuerpo and "X-App-Token" in headers:
+                # Token mal configurado: avisar y seguir sin token (con límites más bajos)
+                print("AVISO: datos.gov.co rechazó el token (Invalid app_token). Sigo sin token; "
+                      "revise el secreto SOCRATA_APP_TOKEN.", file=sys.stderr)
+                _TOKEN_INVALIDO = True
+                headers.pop("X-App-Token")
+                continue
             if e.code in (400, 401, 403, 404):  # error permanente: no reintentar
-                raise RuntimeError(f"HTTP {e.code} en {url}: {e.read()[:200]!r}")
+                raise RuntimeError(f"HTTP {e.code} en {url}: {cuerpo!r}")
             espera = 2 ** (intento + 1)
             print(f"  aviso: {e}; reintento en {espera}s", file=sys.stderr)
             time.sleep(espera)
