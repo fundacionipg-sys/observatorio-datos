@@ -16,6 +16,7 @@ jobs:
           set +e
           exec > >(tee salida.txt) 2>&1
           echo "token configurado: $([ -n "$SOCRATA_APP_TOKEN" ] && echo si || echo no)"
+          echo "clave API configurada: $([ -n "$SOCRATA_KEY_ID" ] && [ -n "$SOCRATA_KEY_SECRET" ] && echo si || echo no)"
           echo "IP del runner: $(curl -s -m 10 https://api.ipify.org)"
           for u in "https://www.datos.gov.co/api/views/jbjy-vk9h.json" \
                    "https://www.datos.gov.co/resource/jbjy-vk9h.json?\$limit=1" \
@@ -26,9 +27,13 @@ jobs:
               curl -sS -o r.txt -m 60 -A "IpG-Observatorio/0.1" -w "CON token: $u -> %{http_code}\n" -H "X-App-Token: $SOCRATA_APP_TOKEN" "$u" || echo "CON token: fallo"
               head -c 300 r.txt; echo
             fi
+            if [ -n "$SOCRATA_KEY_ID" ] && [ -n "$SOCRATA_KEY_SECRET" ]; then
+              curl -sS -o r.txt -m 60 -A "IpG-Observatorio/0.1" -w "CON clave API: $u -> %{http_code}\n" -u "$SOCRATA_KEY_ID:$SOCRATA_KEY_SECRET" "$u" || echo "CON clave API: fallo"
+              head -c 300 r.txt; echo
+            fi
           done
       - name: Publicar resultado como anotaciones
         if: always()
         run: |
           sleep 2
-          while IFS= read -r l; do [ -n "$l" ] && echo "::notice::${l:0:250}"; done < <(grep -E -- "->|token|fallo|message|error" salida.txt)
+          while IFS= read -r l; do [ -n "$l" ] && echo "::notice::${l:0:250}"; done < <(grep -E -- "->|token|clave|fallo|message|error" salida.txt)
