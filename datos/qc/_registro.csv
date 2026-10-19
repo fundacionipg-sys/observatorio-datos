@@ -1,5 +1,6 @@
 consulta,id,estado,filas,segundos,error
 qc_contratos_valor_alto,jbjy-vk9h,ok,637,1,
-qc_bandas_valor_anual,jbjy-vk9h,ok,437,40,
-qc_minima_cuantia_alto,jbjy-vk9h,ok,38,2,
+qc_bandas_valor_anual,jbjy-vk9h,ok,437,17,
+qc_minima_cuantia_alto,jbjy-vk9h,ok,38,1,
 qc_excluidos_por_regla,jbjy-vk9h,ok,59,1,
+radar_ed1_entidades_enero,jbjy-vk9h,ok,4069,9,
