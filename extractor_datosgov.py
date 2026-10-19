@@ -30,7 +30,7 @@ Token de aplicación (recomendado; gratis en https://www.datos.gov.co/profile/ed
     export SOCRATA_APP_TOKEN=xxxxxxxx
 Sin token la API limita por IP y corta descargas largas.
 """
-import argparse, csv, io, json, os, sys, time, unicodedata, urllib.error, urllib.parse, urllib.request
+import argparse, base64, csv, io, json, os, sys, time, unicodedata, urllib.error, urllib.parse, urllib.request
 from datetime import datetime, timezone
 
 DOMINIO = "www.datos.gov.co"
@@ -49,7 +49,11 @@ def _get(url, params=None):
     headers = {"User-Agent": "IpG-Observatorio/0.1"}
     global _TOKEN_INVALIDO
     token = os.environ.get("SOCRATA_APP_TOKEN")
-    if token and not _TOKEN_INVALIDO:
+    kid, ksec = os.environ.get("SOCRATA_KEY_ID"), os.environ.get("SOCRATA_KEY_SECRET")
+    if kid and ksec and not _TOKEN_INVALIDO:
+        # Clave API de datos.gov.co (ID + secreto) por autenticación básica
+        headers["Authorization"] = "Basic " + base64.b64encode(f"{kid}:{ksec}".encode()).decode()
+    elif token and not _TOKEN_INVALIDO:
         headers["X-App-Token"] = token
     for intento in range(REINTENTOS):
         try:
@@ -57,12 +61,13 @@ def _get(url, params=None):
                 return r.read()
         except urllib.error.HTTPError as e:
             cuerpo = e.read()[:300]
-            if e.code == 403 and b"app_token" in cuerpo and "X-App-Token" in headers:
-                # Token mal configurado: avisar y seguir sin token (con límites más bajos)
-                print("AVISO: datos.gov.co rechazó el token (Invalid app_token). Sigo sin token; "
-                      "revise el secreto SOCRATA_APP_TOKEN.", file=sys.stderr)
+            credencial = "X-App-Token" if "X-App-Token" in headers else "Authorization" if "Authorization" in headers else None
+            if e.code in (401, 403) and credencial and (credencial == "Authorization" or b"app_token" in cuerpo):
+                # Credencial mal configurada: avisar y seguir sin ella (con límites más bajos)
+                print(f"AVISO: datos.gov.co rechazó la credencial ({credencial}). Sigo sin ella; "
+                      "revise los secretos del repositorio.", file=sys.stderr)
                 _TOKEN_INVALIDO = True
-                headers.pop("X-App-Token")
+                headers.pop(credencial)
                 continue
             if e.code in (400, 401, 403, 404):  # error permanente: no reintentar
                 raise RuntimeError(f"HTTP {e.code} en {url}: {cuerpo!r}")

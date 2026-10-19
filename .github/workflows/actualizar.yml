@@ -13,6 +13,8 @@ jobs:
     timeout-minutes: 120
     env:
       SOCRATA_APP_TOKEN: ${{ secrets.SOCRATA_APP_TOKEN }}
+      SOCRATA_KEY_ID: ${{ secrets.SOCRATA_KEY_ID }}
+      SOCRATA_KEY_SECRET: ${{ secrets.SOCRATA_KEY_SECRET }}
       SOCRATA_TIMEOUT: "300"
     steps:
       - uses: actions/checkout@v4
