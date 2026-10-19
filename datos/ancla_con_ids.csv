@@ -1,0 +1,51 @@
+linea,titulo,entidad,filas,columnas,frecuencia,ultima_actualizacion,descargas,uso_analitico,id,coincidencias
+Gobierno y Transparencia,SECOP II - Contratos Electrónicos,Agencia Nacional de Contratación Pública - Colombia Compra Eficiente,,95.0,Diaria,2026-10-18,243260,"Contratación pública: quién contrata, con quién, cuánto y cómo (directa vs. competitiva)",jbjy-vk9h,1
+Gobierno y Transparencia,SECOP II - Procesos de Contratación,Agencia Nacional de Contratación Pública - Colombia Compra Eficiente,8747640.0,59.0,Diaria,2026-10-17,164348,"Competencia en procesos, oferentes únicos, tiempos",p6dx-8zbt,1
+Gobierno y Transparencia,SECOP Integrado,Agencia Nacional de Contratación Pública - Colombia Compra Eficiente,20800218.0,22.0,Diaria,2026-10-18,70714,Serie larga SECOP I + II para comparar gobiernos,rpmr-utcd,1
+Gobierno y Transparencia,SECOP II - Adiciones,Agencia Nacional de Contratación Pública - Colombia Compra Eficiente,8365014.0,5.0,Diaria,2026-10-18,22637,Adiciones y sobrecostos de contratos,cb9c-h8sn,1
+Gobierno y Transparencia,Proponentes por Proceso SECOP II,Agencia Nacional de Contratación Pública - Colombia Compra Eficiente,2344796.0,9.0,Diaria,2026-10-18,28415,Concentración de proveedores y carruseles,hgi6-6wh3,1
+Gobierno y Transparencia,SECOP - Convenios Interadministrativos,Agencia Nacional de Contratación Pública - Colombia Compra Eficiente,87583.0,27.0,Diaria,2026-10-18,18941,Uso de convenios para evadir competencia,s484-c9k3,1
+Gobierno y Transparencia,Multas y Sanciones SECOP I,Agencia Nacional de Contratación Pública - Colombia Compra Eficiente,1716.0,14.0,Diaria,2026-10-08,53789,Contratistas sancionados,4n4q-k399,1
+Gobierno y Transparencia,Antecedentes de SIRI,Procuraduría General de la Nación - PGN,42400.0,24.0,Diaria,2026-10-18,31963,Sanciones disciplinarias (Procuraduría),iaeu-rcn6,1
+Gobierno y Transparencia,Tienda Virtual del Estado Colombiano - Consolidado,Agencia Nacional de Contratación Pública - Colombia Compra Eficiente,168931.0,22.0,Diaria,2026-10-18,26592,Compras por acuerdo marco,rgxm-mmea,1
+Finanzas Públicas,Información de Gastos del Presupuesto General de la Nación,Ministerio de Hacienda y Crédito Público - MinHacienda,619541.0,27.0,Mensual,2026-10-08,2375,Ejecución del PGN por entidad y rubro,5phs-yqfw,1
+Finanzas Públicas,Ejecución Presupuestal del Presupuesto General de la Nación detallada por Rubro Presupuestal,Ministerio de Hacienda y Crédito Público - MinHacienda,3844.0,21.0,Mensual,2026-10-08,2838,"Ejecución mensual del PGN (rezago, compromisos vs. pagos)",bpij-5vy9,1
+Finanzas Públicas,OVCF - CUIPO - Ejecución de Gastos,Contraloría General de la República,12150240.0,31.0,Trimestral,2026-08-18,1756,Finanzas territoriales: gasto de alcaldías y gobernaciones,4f7r-epif,1
+Finanzas Públicas,OVCF - CUIPO - Ejecución de Ingresos,Contraloría General de la República,2584787.0,30.0,Trimestral,2026-08-18,2968,Ingresos territoriales y dependencia de transferencias,9axr-9gnb,1
+Finanzas Públicas,Ejecución Financiera de Regalías,Ministerio de Hacienda y Crédito Público - MinHacienda,22583.0,15.0,Diaria,2026-10-18,15653,Regalías: giros y ejecución,br9a-gygu,1
+Finanzas Públicas,Situación de Caja para Regalías,Ministerio de Hacienda y Crédito Público - MinHacienda,5284.0,15.0,Diaria,2026-10-13,1824,Caja disponible del SGR,e624-d9uy,1
+Finanzas Públicas,SECOP II - Rubros Presupuestales,Agencia Nacional de Contratación Pública - Colombia Compra Eficiente,5891594.0,9.0,Diaria,2026-10-09,2677,Cruce contratación–presupuesto,cwhv-7fnp,1
+Seguridad y Defensa,HOMICIDIO,Ministerio de Defensa Nacional - MinDefensa,344202.0,11.0,Mensual,2026-09-16,6457,Homicidios por municipio y día (MinDefensa/Policía),m8fd-ahd9,1
+Seguridad y Defensa,EXTORSIÓN,Ministerio de Defensa Nacional - MinDefensa,131206.0,6.0,Mensual,2026-09-16,1591,Extorsión por municipio,q2ib-t9am,1
+Seguridad y Defensa,SECUESTRO,Ministerio de Defensa Nacional - MinDefensa,10355.0,7.0,Mensual,2026-09-16,1461,Secuestro por municipio,d7zw-hpf4,1
+Seguridad y Defensa,Reporte Hurto por Modalidades Policía Nacional,Dirección General de la Policía Nacional - DIPON,656635.0,9.0,Trimestral,2026-09-01,4100,Hurtos (seguridad ciudadana),9vha-vh9n,3
+Seguridad y Defensa,INCAUTACIONES DE COCAÍNA,Ministerio de Defensa Nacional - MinDefensa,154731.0,7.0,Mensual,2026-09-16,781,Resultados operacionales antidrogas,26zg-9p9r,1
+Seguridad y Defensa,Detección de Cultivos de Coca (hectáreas),Ministerio de Justicia y del derecho - MinJusticia,319.0,28.0,Anual,2026-07-08,5317,Cultivos ilícitos por municipio,acs4-3wgp,1
+Seguridad y Defensa,Cifras de Víctimas Municipal,Unidad Administrativa Especial para la Atención y Reparación Integral a las Víctimas,8243638.0,17.0,Mensual,2026-09-16,2245,Víctimas del conflicto (Unidad de Víctimas),ykxr-xynr,1
+Seguridad y Defensa,Desaparecidos en Colombia - Histórico junio de 2026,Instituto Nacional de Medicina Legal y Ciencias Forenses,205938.0,30.0,Mensual,2026-08-04,4664,Desaparición (Medicina Legal),8hqm-7fdt,1
+Seguridad y Defensa,Procesos Fiscalía - V3,Fiscalía General de la Nación,23477258.0,29.0,Mensual,2026-10-05,561,Eficacia de la justicia penal,dbdv-iihs,1
+Desarrollo Económico,Tasa de Cambio Representativa del Mercado- TRM,Superintendencia Financiera de Colombia - SUPERFINANCIERA,8369.0,4.0,Diaria,2026-10-16,550164,Contexto macro diario,32sa-8pi3,1
+Desarrollo Económico,Tasas de interés activas por tipo de crédito – Histórico,Superintendencia Financiera de Colombia - SUPERFINANCIERA,21150298.0,23.0,Semanal,2026-09-25,38858,Costo del crédito,w9zh-vetq,1
+Desarrollo Económico,10.000 Empresas mas Grandes del País,Superintendencia de Sociedades - SUPERSOCIEDADES,50000.0,14.0,Anual,2026-09-16,48402,Tejido empresarial,6cat-2gcs,1
+Desarrollo Económico,Estados Financieros NIIF- Estado de Situación Financiera,Superintendencia de Sociedades - SUPERSOCIEDAdeS,19638408.0,11.0,Anual,2026-07-06,4498,Salud financiera de empresas (Supersociedades),pfdp-zks5,1
+Desarrollo Económico,"Personas Naturales, Personas Jurídicas y Entidades Sin Animo de Lucro",Confecámaras,9436330.0,36.0,Mensual,2026-10-02,24835,Creación y cierre de empresas (RUES/Confecámaras),c82u-588k,1
+Desarrollo Económico,Evaluaciones Agropecuarias Municipales EVA,Ministerio de Agricultura y Desarrollo Rural - MinAgricultura,206068.0,17.0,Anual,2019-11-24,38718,Producción agrícola municipal,2pnw-mmge,1
+Desarrollo Económico,Registro de transacciones inmobiliarias en Colombia IGAC,Instituto Geográfico Agustín Codazzi - IGAC,30903248.0,26.0,Anual,2025-04-04,1686,Mercado inmobiliario y catastro,7y2j-43cv,1
+Desarrollo Económico,Subsidios De Vivienda Asignados,Ministerio de Vivienda,87095.0,9.0,Mensual,2026-10-01,9989,Política de vivienda,h2yr-zfb2,1
+Sociedad Libre,"MEN_MATRICULA_EN_EDUCACION_EN_PREESCOLAR, BÁSICA Y MEDIA",Ministerio de Educación Nacional - MinEducación,37993250.0,35.0,Anual,2026-08-27,11545,Matrícula oficial vs. privada,ngw5-c5nw,1
+Sociedad Libre,"MEN_ESTADISTICAS_EN_EDUCACION_EN_PREESCOLAR, BÁSICA Y MEDIA_POR_MUNICIPIO",Ministerio de Educación Nacional - MinEducación,15707.0,41.0,Anual,2025-11-13,28684,"Cobertura, deserción y reprobación por municipio",nudc-7mev,1
+Sociedad Libre,Resultados únicos Saber 11,Instituto Colombiano para la Evaluación de la Educación - ICFES,7109704.0,51.0,Semestral,2023-08-23,14191,Calidad educativa (colegios oficiales vs. privados),kgxf-xxbe,1
+Sociedad Libre,Registro Especial de Prestadores y Sedes de Servicios de Salud,Ministerio de Salud y Protección Social - MinSalud,76821.0,22.0,Anual,2026-04-17,74526,Oferta de salud (REPS),c36g-9fc2,1
+Sociedad Libre,Población Base de Datos Única de Afiliados BDUA del régimen contributivo,Administradora de los Recursos del Sistema General de Seguridad Social en Salud - ADRES,637506.0,14.0,Mensual,2026-10-02,8783,Afiliación en salud (crisis EPS),tq4m-hmg2,1
+Sociedad Libre,MEDICAMENTOS VITALES NO DISPONIBLES,Instituto Nacional de Vigilancia de Medicamentos y Alimentos - INVIMA,11155.0,16.0,Mensual,2026-10-07,24291,Desabastecimiento de medicamentos,sdmr-tfmf,1
+Sociedad Libre,Unidades de Servicio (UDS) en Primera Infancia ICBF,Instituto Colombiano de Bienestar Familiar - ICBF,57952.0,16.0,Anual,2026-10-15,8729,Primera infancia y familia,i8ww-5mcf,1
+Sociedad Libre,"Violencia intrafamiliar. Colombia, años 2015 a 2024. Cifras definitivas",Instituto Nacional de Medicina Legal y Ciencias Forenses,236840.0,36.0,Anual,2025-09-22,4581,Familia y violencia,ers2-kerr,1
+Sociedad Libre,"Presuntos Suicidios. Colombia, 2015 a 2024. Cifras definitivas",Instituto Nacional de Medicina Legal y Ciencias Forenses,26558.0,32.0,Anual,2025-09-19,3163,Salud mental,f75u-mirk,1
+Democracia y Libertad,RESULTADOS ELECTORALES 2018 SENADO DE LA REPUBLICA,Registraduría Nacional del Estado Civil,5191659.0,10.0,Anual,2021-03-15,2830,Resultados electorales (solo 2018 en el portal),75f2-fe2s,1
+Democracia y Libertad,Divipole Elecciones Territoritoriales 2023 con georreferenciación,Registraduría Nacional del Estado Civil,12922.0,13.0,Anual,2023-10-11,30168,Puestos de votación georreferenciados,mv2e-prx5,1
+Democracia y Libertad,VOTACIONES SESIONES PLENARIA SENADO DE LA REPUBLICA,Senado de la República,16733.0,4.0,Mensual,2024-10-29,343,Votaciones nominales del Senado (Observatorio Legislativo),ucmr-52df,1
+Democracia y Libertad,Proyectos de Ley,Cámara de Representantes,6606.0,16.0,Anual,2026-09-17,872,Trámite legislativo (Cámara),kcxp-nxum,1
+Democracia y Libertad,Sentencias proferidas por la Corte Constitucional,Corte Constitucional,29474.0,10.0,Mensual,2026-09-10,2596,Jurisprudencia y libertades,v2k4-2t8s,1
+Fe y Política,Entidades sin ánimo de Lucro del Régimen Tributario Especial,Unidad Administrativa Especial Dirección de Impuestos y Aduanas Nacionales - DIAN,340038.0,3.0,Anual,2022-12-16,59249,ESAL en régimen especial (incluye confesiones y obras sociales) — proxy,8tdc-u2ga,1
+Fe y Política,Centros religiosos de la ciudad de Pereira,Alcaldía de Pereira,56.0,6.0,Anual,2026-04-07,101,Ejemplo de registro municipal de templos (no hay registro nacional),m7ny-e6v7,1
+Fe y Política,IGLESIAS DE FACATATIVÁ,Alcaldía de Facatativá,61.0,5.0,Anual,2026-08-06,24,Ejemplo de registro municipal de templos,jbe3-ctyn,1
