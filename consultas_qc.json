@@ -1,0 +1,28 @@
+[
+ {
+  "nombre": "qc_contratos_valor_alto",
+  "producto": "Radar de contratación (control de calidad)",
+  "id": "jbjy-vk9h",
+  "select": "id_contrato, fecha_de_firma, nombre_entidad, nit_entidad, orden, sector, modalidad_de_contratacion, tipo_de_contrato, estado_contrato, proveedor_adjudicado, valor_del_contrato, valor_pagado, valor_facturado, presupuesto_general_de_la_nacion_pgn, sistema_general_de_participaciones, sistema_general_de_regal_as, duraci_n_del_contrato, objeto_del_contrato, urlproceso",
+  "where": "fecha_de_firma >= '2022-01-01T00:00:00' AND valor_del_contrato >= 100000000000",
+  "order": "valor_del_contrato DESC",
+  "limit": 20000
+ },
+ {
+  "nombre": "qc_bandas_valor_anual",
+  "producto": "Radar de contratación (control de calidad)",
+  "id": "jbjy-vk9h",
+  "select": "date_extract_y(fecha_de_firma) AS anio, modalidad_de_contratacion, case(valor_del_contrato IS NULL, '0 nulo', valor_del_contrato <= 0, '1 cero o negativo', valor_del_contrato < 10000000, '2 menos de 10 millones', valor_del_contrato < 100000000, '3 10 a 100 millones', valor_del_contrato < 1000000000, '4 100 a 1.000 millones', valor_del_contrato < 10000000000, '5 1.000 a 10.000 millones', valor_del_contrato < 100000000000, '6 10.000 a 100.000 millones', valor_del_contrato < 1000000000000, '7 100.000 millones a 1 billon', true, '8 mas de 1 billon') AS banda, count(*) AS contratos, sum(valor_del_contrato) AS valor",
+  "where": "fecha_de_firma >= '2022-01-01T00:00:00'",
+  "group": "anio, modalidad_de_contratacion, banda"
+ },
+ {
+  "nombre": "qc_minima_cuantia_alto",
+  "producto": "Radar de contratación (control de calidad)",
+  "id": "jbjy-vk9h",
+  "select": "id_contrato, fecha_de_firma, nombre_entidad, modalidad_de_contratacion, valor_del_contrato, valor_pagado, objeto_del_contrato, urlproceso",
+  "where": "fecha_de_firma >= '2022-01-01T00:00:00' AND modalidad_de_contratacion = 'Mínima cuantía' AND valor_del_contrato >= 1000000000",
+  "order": "valor_del_contrato DESC",
+  "limit": 5000
+ }
+]

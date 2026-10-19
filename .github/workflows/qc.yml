@@ -1,0 +1,28 @@
+name: Control de calidad
+# Consultas de revisión de datos (valores atípicos). Solo a mano.
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  qc:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      SOCRATA_KEY_ID: ${{ secrets.SOCRATA_KEY_ID }}
+      SOCRATA_KEY_SECRET: ${{ secrets.SOCRATA_KEY_SECRET }}
+      SOCRATA_TIMEOUT: "300"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Consultas de control de calidad
+        run: python -u extractor_datosgov.py consultas --config consultas_qc.json --salida datos/qc
+      - name: Guardar resultados
+        if: always()
+        run: |
+          git config user.name "observatorio-bot"
+          git config user.email "observatorio-bot@users.noreply.github.com"
+          git add datos/ || true
+          git diff --cached --quiet || (git commit -m "Control de calidad $(date -u +%F)" && git pull --rebase && git push)
