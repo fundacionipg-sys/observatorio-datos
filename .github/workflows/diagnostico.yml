@@ -1,0 +1,25 @@
+name: Diagnostico de conexion
+# Prueba rápida de acceso a datos.gov.co, con y sin token. Solo a mano.
+on:
+  workflow_dispatch:
+jobs:
+  probar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      SOCRATA_APP_TOKEN: ${{ secrets.SOCRATA_APP_TOKEN }}
+    steps:
+      - name: Probar endpoints
+        run: |
+          echo "token configurado: $([ -n "$SOCRATA_APP_TOKEN" ] && echo si || echo no)"
+          echo "IP del runner: $(curl -s -m 10 https://api.ipify.org)"
+          for u in "https://www.datos.gov.co/api/views/jbjy-vk9h.json" \
+                   "https://www.datos.gov.co/resource/jbjy-vk9h.json?\$limit=1" \
+                   "https://datos.gov.co/resource/jbjy-vk9h.json?\$limit=1"; do
+            curl -sS -o r.txt -m 60 -A "IpG-Observatorio/0.1" -w "SIN token: $u -> %{http_code}\n" "$u" || echo "SIN token: fallo"
+            head -c 300 r.txt; echo
+            if [ -n "$SOCRATA_APP_TOKEN" ]; then
+              curl -sS -o r.txt -m 60 -A "IpG-Observatorio/0.1" -w "CON token: $u -> %{http_code}\n" -H "X-App-Token: $SOCRATA_APP_TOKEN" "$u" || echo "CON token: fallo"
+              head -c 300 r.txt; echo
+            fi
+          done

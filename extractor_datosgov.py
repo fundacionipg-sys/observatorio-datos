@@ -30,7 +30,7 @@ Token de aplicación (recomendado; gratis en https://www.datos.gov.co/profile/ed
     export SOCRATA_APP_TOKEN=xxxxxxxx
 Sin token la API limita por IP y corta descargas largas.
 """
-import argparse, csv, io, json, os, sys, time, unicodedata, urllib.parse, urllib.request
+import argparse, csv, io, json, os, sys, time, unicodedata, urllib.error, urllib.parse, urllib.request
 from datetime import datetime, timezone
 
 DOMINIO = "www.datos.gov.co"
@@ -51,6 +51,12 @@ def _get(url, params=None):
         try:
             with urllib.request.urlopen(urllib.request.Request(url, headers=headers), timeout=TIMEOUT) as r:
                 return r.read()
+        except urllib.error.HTTPError as e:
+            if e.code in (400, 401, 403, 404):  # error permanente: no reintentar
+                raise RuntimeError(f"HTTP {e.code} en {url}: {e.read()[:200]!r}")
+            espera = 2 ** (intento + 1)
+            print(f"  aviso: {e}; reintento en {espera}s", file=sys.stderr)
+            time.sleep(espera)
         except Exception as e:  # 429/5xx/timeout: espera exponencial
             espera = 2 ** (intento + 1)
             print(f"  aviso: {e}; reintento en {espera}s", file=sys.stderr)

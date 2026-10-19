@@ -26,9 +26,17 @@ jobs:
           mkdir -p datos
           ID=$(python -c "import csv;print(next((r['id'] for r in csv.DictReader(open('datos/ancla_con_ids.csv')) if r['id']),''))")
           echo "id de prueba: $ID"
+          echo "token configurado: $([ -n "$SOCRATA_APP_TOKEN" ] && echo si || echo no)"
+          {
           for u in "https://www.datos.gov.co/api/views/${ID}.json" "https://www.datos.gov.co/resource/${ID}.json?\$limit=1"; do
-            curl -sS -o /dev/null -m 60 -w "$u -> %{http_code} en %{time_total}s\n" -H "X-App-Token: $SOCRATA_APP_TOKEN" "$u" || echo "$u -> fallo"
-          done | tee datos/diagnostico_conexion.txt
+            curl -sS -o /tmp/r.txt -m 60 -w "SIN token: $u -> %{http_code}\n" "$u" || echo "SIN token: fallo"
+            head -c 300 /tmp/r.txt; echo
+            if [ -n "$SOCRATA_APP_TOKEN" ]; then
+              curl -sS -o /tmp/r.txt -m 60 -w "CON token: $u -> %{http_code}\n" -H "X-App-Token: $SOCRATA_APP_TOKEN" "$u" || echo "CON token: fallo"
+              head -c 300 /tmp/r.txt; echo
+            fi
+          done
+          } | tee datos/diagnostico_conexion.txt
       - name: Diccionario de columnas
         continue-on-error: true
         timeout-minutes: 30
