@@ -24,5 +24,14 @@
   "where": "fecha_de_firma >= '2022-01-01T00:00:00' AND modalidad_de_contratacion = 'Mínima cuantía' AND valor_del_contrato >= 1000000000",
   "order": "valor_del_contrato DESC",
   "limit": 5000
+ },
+ {
+  "nombre": "qc_excluidos_por_regla",
+  "producto": "Radar de contratación (control de calidad)",
+  "id": "jbjy-vk9h",
+  "select": "id_contrato, fecha_de_firma, nombre_entidad, orden, modalidad_de_contratacion, tipo_de_contrato, valor_del_contrato, valor_facturado, valor_pagado, case(valor_del_contrato IS NULL OR valor_del_contrato <= 0, 'R1 valor nulo o cero', modalidad_de_contratacion = 'Mínima cuantía' AND valor_del_contrato > 200000000, 'R2 minima cuantia sobre tope', valor_del_contrato >= 10000000000000, 'R3 mas de 10 billones', valor_del_contrato >= 10000000000 AND (upper(objeto_del_contrato) like '%SERVICIOS PROFESIONALES%' OR upper(objeto_del_contrato) like '%APOYO A LA GESTI%' OR upper(objeto_del_contrato) like '%AUXILIAR%'), 'R4 servicios personales sobre 10.000 millones', valor_del_contrato >= 100000000000 AND valor_facturado > 0 AND valor_del_contrato > valor_facturado * 500, 'R5 error de unidades frente a lo facturado') AS regla, objeto_del_contrato, urlproceso",
+  "where": "fecha_de_firma >= '2022-01-01T00:00:00' AND valor_del_contrato >= 1000000000 AND ((valor_del_contrato IS NULL OR valor_del_contrato <= 0) OR (modalidad_de_contratacion = 'Mínima cuantía' AND valor_del_contrato > 200000000) OR (valor_del_contrato >= 10000000000000) OR (valor_del_contrato >= 10000000000 AND (upper(objeto_del_contrato) like '%SERVICIOS PROFESIONALES%' OR upper(objeto_del_contrato) like '%APOYO A LA GESTI%' OR upper(objeto_del_contrato) like '%AUXILIAR%')) OR (valor_del_contrato >= 100000000000 AND valor_facturado > 0 AND valor_del_contrato > valor_facturado * 500))",
+  "order": "valor_del_contrato DESC",
+  "limit": 20000
  }
 ]
