@@ -199,6 +199,7 @@ def consultas(config, carpeta):
     with open(config, encoding="utf-8") as f:
         qs = json.load(f)
     os.makedirs(carpeta, exist_ok=True)
+    registro = []
     for q in qs:
         if q.get("activa") is False:
             continue
@@ -206,14 +207,22 @@ def consultas(config, carpeta):
         for k in ("select", "where", "group", "order", "having"):
             if q.get(k):
                 p["$" + k] = q[k]
+        inicio = time.time()
         try:
             datos = _get(f"https://{DOMINIO}/resource/{q['id']}.csv", p)
         except Exception as e:
-            print(f"ERROR {q['nombre']}: {e}", file=sys.stderr); continue
+            print(f"ERROR {q['nombre']}: {e}", file=sys.stderr)
+            registro.append([q["nombre"], q["id"], "error", "", round(time.time() - inicio), str(e)[:300]])
+            continue
         with open(os.path.join(carpeta, q["nombre"] + ".csv"), "wb") as out:
             out.write(datos)
-        print(f"Listo: {q['nombre']}")
-
+        filas = max(datos.count(b"\n") - 1, 0)
+        registro.append([q["nombre"], q["id"], "ok", filas, round(time.time() - inicio), ""])
+        print(f"Listo: {q['nombre']} ({filas} filas)")
+    with open(os.path.join(carpeta, "_registro.csv"), "w", newline="", encoding="utf-8") as f:
+        w = csv.writer(f)
+        w.writerow(["consulta", "id", "estado", "filas", "segundos", "error"])
+        w.writerows(registro)
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)

@@ -13,13 +13,15 @@ jobs:
     timeout-minutes: 120
     env:
       SOCRATA_APP_TOKEN: ${{ secrets.SOCRATA_APP_TOKEN }}
+      SOCRATA_TIMEOUT: "300"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: python extractor_datosgov.py consultas --config consultas.json --salida datos/productos
+      - run: python -u extractor_datosgov.py consultas --config consultas.json --salida datos/productos
       - name: Guardar resultados en el repositorio
+        if: always()
         run: |
           git config user.name "observatorio-bot"
           git config user.email "observatorio-bot@users.noreply.github.com"
