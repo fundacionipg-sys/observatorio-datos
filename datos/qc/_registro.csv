@@ -1,5 +1,5 @@
 consulta,id,estado,filas,segundos,error
-qc_contratos_valor_alto,jbjy-vk9h,ok,637,4,
-qc_bandas_valor_anual,jbjy-vk9h,ok,437,12,
-qc_minima_cuantia_alto,jbjy-vk9h,ok,38,1,
-qc_excluidos_por_regla,jbjy-vk9h,ok,231,1,
+qc_contratos_valor_alto,jbjy-vk9h,ok,637,1,
+qc_bandas_valor_anual,jbjy-vk9h,ok,437,40,
+qc_minima_cuantia_alto,jbjy-vk9h,ok,38,2,
+qc_excluidos_por_regla,jbjy-vk9h,ok,59,1,
