@@ -1,0 +1,30 @@
+name: Catalogo y diccionario
+# Descarga el catálogo de datos.gov.co, asigna ids a los datasets ancla
+# y guarda el diccionario de columnas. Corre el día 1 de cada mes o a mano.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 9 1 * *"   # 04:00 hora de Colombia
+permissions:
+  contents: write
+jobs:
+  catalogo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      SOCRATA_APP_TOKEN: ${{ secrets.SOCRATA_APP_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python extractor_datosgov.py catalogo --salida datos/catalogo_api.csv
+      - run: python extractor_datosgov.py cruzar --catalogo datos/catalogo_api.csv --ancla catalogo_ancla.csv --salida datos/ancla_con_ids.csv
+      - run: python extractor_datosgov.py metadatos --ids datos/ancla_con_ids.csv --salida datos/diccionario_ancla.csv
+      - name: Guardar resultados en el repositorio
+        run: |
+          git config user.name "observatorio-bot"
+          git config user.email "observatorio-bot@users.noreply.github.com"
+          git add datos/
+          git diff --cached --quiet || git commit -m "Catálogo y diccionario $(date -u +%F)"
+          git push

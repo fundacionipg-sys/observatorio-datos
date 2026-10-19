@@ -1,0 +1,13 @@
+[
+  {
+    "nombre": "ejemplo_secop_top_entidades_2026",
+    "activa": false,
+    "nota": "Ejemplo. Se activa cuando el diccionario confirme los nombres de columna.",
+    "id": "jbjy-vk9h",
+    "select": "nombre_entidad, sum(valor_del_contrato) AS total, count(*) AS contratos",
+    "where": "fecha_de_firma >= '2026-01-01'",
+    "group": "nombre_entidad",
+    "order": "total DESC",
+    "limit": 100
+  }
+]
