@@ -1,2 +1,25 @@
-https://www.datos.gov.co/api/views/jbjy-vk9h.json -> 403 en 0.662769s
-https://www.datos.gov.co/resource/jbjy-vk9h.json?$limit=1 -> 403 en 0.717257s
+SIN token: https://www.datos.gov.co/api/views/jbjy-vk9h.json -> 200
+{
+  "id" : "jbjy-vk9h",
+  "name" : "SECOP II - Contratos Electrónicos",
+  "assetType" : "dataset",
+  "attribution" : "Agencia Nacional de Contratación Pública - Colombia Compra Eficiente, Bogotá D.C.",
+  "attributionLink" : "https://colombiacompra.gov.co",
+  "averageRating" : 0,
+  "category" : "
+CON token: https://www.datos.gov.co/api/views/jbjy-vk9h.json -> 403
+{
+  "code" : "permission_denied",
+  "error" : true,
+  "message" : "Invalid app_token specified"
+}
+
+SIN token: https://www.datos.gov.co/resource/jbjy-vk9h.json?$limit=1 -> 200
+[{"nombre_entidad":"Ministerio de las Culturas, las Artes y los Saberes","nit_entidad":"830034348","departamento":"Distrito Capital de Bogotá","ciudad":"Bogotá","localizaci_n":"Colombia, Bogotá,  Bogotá","orden":"Nacional","sector":"Cultura","rama":"Ejecutivo","entidad_centralizada":"Centralizad
+CON token: https://www.datos.gov.co/resource/jbjy-vk9h.json?$limit=1 -> 403
+{
+  "code" : "permission_denied",
+  "error" : true,
+  "message" : "Invalid app_token specified"
+}
+
