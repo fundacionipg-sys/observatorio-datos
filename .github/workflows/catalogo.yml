@@ -50,4 +50,4 @@ jobs:
           git config user.email "observatorio-bot@users.noreply.github.com"
           git add datos/
           git diff --cached --quiet || git commit -m "Catálogo y diccionario $(date -u +%F)"
-          git push
+          for i in 1 2 3 4; do git pull --rebase -q origin main && git push && break; sleep $((i*5)); done
