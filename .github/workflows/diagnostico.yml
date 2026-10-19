@@ -11,6 +11,7 @@ jobs:
     steps:
       - name: Probar endpoints
         run: |
+          set +e
           exec > >(tee salida.txt) 2>&1
           echo "token configurado: $([ -n "$SOCRATA_APP_TOKEN" ] && echo si || echo no)"
           echo "IP del runner: $(curl -s -m 10 https://api.ipify.org)"
@@ -28,4 +29,4 @@ jobs:
         if: always()
         run: |
           sleep 2
-          while IFS= read -r l; do [ -n "$l" ] && echo "::notice::${l:0:250}"; done < salida.txt
+          while IFS= read -r l; do [ -n "$l" ] && echo "::notice::${l:0:250}"; done < <(grep -E -- "->|token|fallo|message|error" salida.txt)
