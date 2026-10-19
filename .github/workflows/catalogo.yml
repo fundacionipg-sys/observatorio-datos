@@ -20,8 +20,21 @@ jobs:
           python-version: "3.12"
       - run: python extractor_datosgov.py catalogo --salida datos/catalogo_api.csv
       - run: python extractor_datosgov.py cruzar --catalogo datos/catalogo_api.csv --ancla catalogo_ancla.csv --salida datos/ancla_con_ids.csv
-      - run: python extractor_datosgov.py metadatos --ids datos/ancla_con_ids.csv --salida datos/diccionario_ancla.csv
+      - name: Diagnóstico de conexión con datos.gov.co
+        continue-on-error: true
+        run: |
+          mkdir -p datos
+          ID=$(python -c "import csv;print(next((r['id'] for r in csv.DictReader(open('datos/ancla_con_ids.csv')) if r['id']),''))")
+          echo "id de prueba: $ID"
+          for u in "https://www.datos.gov.co/api/views/${ID}.json" "https://www.datos.gov.co/resource/${ID}.json?\$limit=1"; do
+            curl -sS -o /dev/null -m 60 -w "$u -> %{http_code} en %{time_total}s\n" -H "X-App-Token: $SOCRATA_APP_TOKEN" "$u" || echo "$u -> fallo"
+          done | tee datos/diagnostico_conexion.txt
+      - name: Diccionario de columnas
+        continue-on-error: true
+        timeout-minutes: 30
+        run: python -u extractor_datosgov.py metadatos --ids datos/ancla_con_ids.csv --salida datos/diccionario_ancla.csv
       - name: Guardar resultados en el repositorio
+        if: always()
         run: |
           git config user.name "observatorio-bot"
           git config user.email "observatorio-bot@users.noreply.github.com"

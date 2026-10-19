@@ -36,7 +36,8 @@ from datetime import datetime, timezone
 DOMINIO = "www.datos.gov.co"
 DISCOVERY = "https://api.us.socrata.com/api/catalog/v1"
 PAGINA = 50000          # filas por petición SODA (máximo práctico recomendado)
-REINTENTOS = 5
+REINTENTOS = 3
+TIMEOUT = int(os.environ.get("SOCRATA_TIMEOUT", "90"))  # segundos por petición
 
 
 def _get(url, params=None):
@@ -48,7 +49,7 @@ def _get(url, params=None):
         headers["X-App-Token"] = token
     for intento in range(REINTENTOS):
         try:
-            with urllib.request.urlopen(urllib.request.Request(url, headers=headers), timeout=300) as r:
+            with urllib.request.urlopen(urllib.request.Request(url, headers=headers), timeout=TIMEOUT) as r:
                 return r.read()
         except Exception as e:  # 429/5xx/timeout: espera exponencial
             espera = 2 ** (intento + 1)
@@ -163,7 +164,8 @@ def metadatos(archivo_ids, salida):
     with open(salida, "w", newline="", encoding="utf-8") as out:
         w = csv.writer(out)
         w.writerow(["id", "titulo", "linea", "columna_api", "nombre_visible", "tipo", "descripcion"])
-        for r in filas:
+        for i, r in enumerate(filas, 1):
+            print(f"  metadatos {i}/{len(filas)}: {r['id']}", file=sys.stderr, flush=True)
             try:
                 v = json.loads(_get(f"https://{DOMINIO}/api/views/{r['id']}.json"))
             except Exception as e:
