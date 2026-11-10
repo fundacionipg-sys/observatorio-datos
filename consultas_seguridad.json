@@ -1,0 +1,221 @@
+[
+ {
+  "nombre": "seg_homicidio",
+  "producto": "Termómetro de seguridad",
+  "id": "m8fd-ahd9",
+  "select": "date_trunc_ym(fecha_hecho) AS mes, cod_depto, departamento, cod_muni, municipio, sum(cantidad) AS casos",
+  "where": "fecha_hecho >= '2010-01-01T00:00:00'",
+  "group": "date_trunc_ym(fecha_hecho), cod_depto, departamento, cod_muni, municipio"
+ },
+ {
+  "nombre": "seg_extorsion",
+  "producto": "Termómetro de seguridad",
+  "id": "q2ib-t9am",
+  "select": "date_trunc_ym(fecha_hecho) AS mes, cod_depto, departamento, cod_muni, municipio, sum(cantidad) AS casos",
+  "where": "fecha_hecho >= '2010-01-01T00:00:00'",
+  "group": "date_trunc_ym(fecha_hecho), cod_depto, departamento, cod_muni, municipio"
+ },
+ {
+  "nombre": "seg_secuestro",
+  "producto": "Termómetro de seguridad",
+  "id": "d7zw-hpf4",
+  "select": "date_trunc_ym(fecha_hecho) AS mes, cod_depto, departamento, cod_muni, municipio, tipo_delito, sum(cantidad) AS casos",
+  "where": "fecha_hecho >= '2010-01-01T00:00:00'",
+  "group": "date_trunc_ym(fecha_hecho), cod_depto, departamento, cod_muni, municipio, tipo_delito"
+ },
+ {
+  "nombre": "seg_masacres",
+  "producto": "Termómetro de seguridad",
+  "id": "u8eq-92tb",
+  "select": "date_trunc_ym(fecha_hecho) AS mes, cod_depto, departamento, cod_muni, municipio, sum(casos) AS casos, sum(victimas) AS victimas",
+  "where": "fecha_hecho >= '2010-01-01T00:00:00'",
+  "group": "date_trunc_ym(fecha_hecho), cod_depto, departamento, cod_muni, municipio"
+ },
+ {
+  "nombre": "seg_fuerza_publica",
+  "producto": "Termómetro de seguridad",
+  "id": "8rpn-wpty",
+  "select": "date_trunc_ym(fecha_hecho) AS mes, cod_depto, departamento, cod_muni, municipio, accion, sum(cantidad) AS casos",
+  "where": "fecha_hecho >= '2010-01-01T00:00:00'",
+  "group": "date_trunc_ym(fecha_hecho), cod_depto, departamento, cod_muni, municipio, accion",
+  "nota": "Afectación de miembros de la Fuerza Pública (accion: asesinados, heridos, etc.)"
+ },
+ {
+  "nombre": "seg_terrorismo",
+  "producto": "Termómetro de seguridad",
+  "id": "yi5j-5fe9",
+  "select": "date_trunc_ym(fecha_hecho) AS mes, cod_depto, departamento, cod_muni, municipio, sum(cantidad) AS casos",
+  "where": "fecha_hecho >= '2010-01-01T00:00:00'",
+  "group": "date_trunc_ym(fecha_hecho), cod_depto, departamento, cod_muni, municipio"
+ },
+ {
+  "nombre": "seg_hurto_personas",
+  "producto": "Termómetro de seguridad",
+  "id": "4rxi-8m8d",
+  "select": "date_trunc_ym(fecha_hecho) AS mes, cod_depto, departamento, cod_muni, municipio, sum(cantidad) AS casos",
+  "where": "fecha_hecho >= '2010-01-01T00:00:00'",
+  "group": "date_trunc_ym(fecha_hecho), cod_depto, departamento, cod_muni, municipio"
+ },
+ {
+  "nombre": "seg_hurto_vehiculos",
+  "producto": "Termómetro de seguridad",
+  "id": "csb4-y6v2",
+  "select": "date_trunc_ym(fecha_hecho) AS mes, cod_depto, departamento, cod_muni, municipio, tipo_delito, sum(cantidad) AS casos",
+  "where": "fecha_hecho >= '2010-01-01T00:00:00'",
+  "group": "date_trunc_ym(fecha_hecho), cod_depto, departamento, cod_muni, municipio, tipo_delito"
+ },
+ {
+  "nombre": "seg_hurto_residencias",
+  "producto": "Termómetro de seguridad",
+  "id": "7mn7-vzqp",
+  "select": "date_trunc_ym(fecha_hecho) AS mes, cod_depto, departamento, cod_muni, municipio, sum(cantidad) AS casos",
+  "where": "fecha_hecho >= '2010-01-01T00:00:00'",
+  "group": "date_trunc_ym(fecha_hecho), cod_depto, departamento, cod_muni, municipio"
+ },
+ {
+  "nombre": "seg_hurto_comercio",
+  "producto": "Termómetro de seguridad",
+  "id": "7i2x-h5vp",
+  "select": "date_trunc_ym(fecha_hecho) AS mes, cod_depto, departamento, cod_muni, municipio, sum(cantidad) AS casos",
+  "where": "fecha_hecho >= '2010-01-01T00:00:00'",
+  "group": "date_trunc_ym(fecha_hecho), cod_depto, departamento, cod_muni, municipio"
+ },
+ {
+  "nombre": "seg_incautacion_cocaina",
+  "producto": "Termómetro de seguridad",
+  "id": "26zg-9p9r",
+  "select": "date_trunc_ym(fecha_hecho) AS mes, cod_depto, departamento, cod_muni, municipio, sum(cantidad) AS cantidad, count(*) AS registros",
+  "where": "fecha_hecho >= '2010-01-01T00:00:00'",
+  "group": "date_trunc_ym(fecha_hecho), cod_depto, departamento, cod_muni, municipio",
+  "nota": "Sin agrupar por unidad: ver qc_unidades_incautacion"
+ },
+ {
+  "nombre": "seg_incautacion_base_coca",
+  "producto": "Termómetro de seguridad",
+  "id": "nxbk-nikm",
+  "select": "date_trunc_ym(fecha_hecho) AS mes, cod_depto, departamento, cod_muni, municipio, sum(cantidad) AS cantidad, count(*) AS registros",
+  "where": "fecha_hecho >= '2010-01-01T00:00:00'",
+  "group": "date_trunc_ym(fecha_hecho), cod_depto, departamento, cod_muni, municipio"
+ },
+ {
+  "nombre": "seg_erradicacion",
+  "producto": "Termómetro de seguridad",
+  "id": "p72f-qcvk",
+  "select": "date_trunc_ym(fecha_hecho) AS mes, cod_depto, departamento, cod_muni, municipio, tipo_de_cultivo, sum(cantidad) AS cantidad",
+  "where": "fecha_hecho >= '2010-01-01T00:00:00'",
+  "group": "date_trunc_ym(fecha_hecho), cod_depto, departamento, cod_muni, municipio, tipo_de_cultivo"
+ },
+ {
+  "nombre": "seg_coca_detectada",
+  "producto": "Termómetro de seguridad",
+  "id": "acs4-3wgp",
+  "select": "*",
+  "limit": 5000,
+  "nota": "Censo SIMCI de cultivos de coca (hectáreas por municipio y año), tabla ancha"
+ },
+ {
+  "nombre": "qc_corte_homicidio",
+  "producto": "Termómetro de seguridad",
+  "id": "m8fd-ahd9",
+  "select": "min(fecha_hecho) AS primera, max(fecha_hecho) AS ultima, count(*) AS filas"
+ },
+ {
+  "nombre": "qc_corte_extorsion",
+  "producto": "Termómetro de seguridad",
+  "id": "q2ib-t9am",
+  "select": "min(fecha_hecho) AS primera, max(fecha_hecho) AS ultima, count(*) AS filas"
+ },
+ {
+  "nombre": "qc_corte_secuestro",
+  "producto": "Termómetro de seguridad",
+  "id": "d7zw-hpf4",
+  "select": "min(fecha_hecho) AS primera, max(fecha_hecho) AS ultima, count(*) AS filas"
+ },
+ {
+  "nombre": "qc_corte_masacres",
+  "producto": "Termómetro de seguridad",
+  "id": "u8eq-92tb",
+  "select": "min(fecha_hecho) AS primera, max(fecha_hecho) AS ultima, count(*) AS filas"
+ },
+ {
+  "nombre": "qc_corte_fuerza_publica",
+  "producto": "Termómetro de seguridad",
+  "id": "8rpn-wpty",
+  "select": "min(fecha_hecho) AS primera, max(fecha_hecho) AS ultima, count(*) AS filas"
+ },
+ {
+  "nombre": "qc_corte_terrorismo",
+  "producto": "Termómetro de seguridad",
+  "id": "yi5j-5fe9",
+  "select": "min(fecha_hecho) AS primera, max(fecha_hecho) AS ultima, count(*) AS filas"
+ },
+ {
+  "nombre": "qc_corte_hurto_personas",
+  "producto": "Termómetro de seguridad",
+  "id": "4rxi-8m8d",
+  "select": "min(fecha_hecho) AS primera, max(fecha_hecho) AS ultima, count(*) AS filas"
+ },
+ {
+  "nombre": "qc_corte_hurto_vehiculos",
+  "producto": "Termómetro de seguridad",
+  "id": "csb4-y6v2",
+  "select": "min(fecha_hecho) AS primera, max(fecha_hecho) AS ultima, count(*) AS filas"
+ },
+ {
+  "nombre": "qc_corte_hurto_residencias",
+  "producto": "Termómetro de seguridad",
+  "id": "7mn7-vzqp",
+  "select": "min(fecha_hecho) AS primera, max(fecha_hecho) AS ultima, count(*) AS filas"
+ },
+ {
+  "nombre": "qc_corte_hurto_comercio",
+  "producto": "Termómetro de seguridad",
+  "id": "7i2x-h5vp",
+  "select": "min(fecha_hecho) AS primera, max(fecha_hecho) AS ultima, count(*) AS filas"
+ },
+ {
+  "nombre": "qc_corte_incautacion_cocaina",
+  "producto": "Termómetro de seguridad",
+  "id": "26zg-9p9r",
+  "select": "min(fecha_hecho) AS primera, max(fecha_hecho) AS ultima, count(*) AS filas"
+ },
+ {
+  "nombre": "qc_corte_incautacion_base_coca",
+  "producto": "Termómetro de seguridad",
+  "id": "nxbk-nikm",
+  "select": "min(fecha_hecho) AS primera, max(fecha_hecho) AS ultima, count(*) AS filas"
+ },
+ {
+  "nombre": "qc_corte_erradicacion",
+  "producto": "Termómetro de seguridad",
+  "id": "p72f-qcvk",
+  "select": "min(fecha_hecho) AS primera, max(fecha_hecho) AS ultima, count(*) AS filas"
+ },
+ {
+  "nombre": "qc_unidades_cocaina",
+  "producto": "Termómetro de seguridad",
+  "id": "26zg-9p9r",
+  "select": "unidad, count(*) AS registros, sum(cantidad) AS total",
+  "group": "unidad",
+  "order": "registros DESC",
+  "limit": 50
+ },
+ {
+  "nombre": "qc_unidades_base_coca",
+  "producto": "Termómetro de seguridad",
+  "id": "nxbk-nikm",
+  "select": "unidad, count(*) AS registros, sum(cantidad) AS total",
+  "group": "unidad",
+  "order": "registros DESC",
+  "limit": 50
+ },
+ {
+  "nombre": "qc_unidades_erradicacion",
+  "producto": "Termómetro de seguridad",
+  "id": "p72f-qcvk",
+  "select": "unidad, count(*) AS registros, sum(cantidad) AS total",
+  "group": "unidad",
+  "order": "registros DESC",
+  "limit": 50
+ }
+]
