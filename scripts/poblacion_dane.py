@@ -51,7 +51,8 @@ def leer(xlsx):
             if enc is None:
                 if any(c in ("AÑO", "ANO", "AÑO ") for c in celdas) and any(c in ("DPMP", "MPIO", "COD_MPIO") for c in celdas):
                     enc = celdas
-                    i_cod = next(i for i, c in enumerate(enc) if c in ("DPMP", "COD_MPIO", "MPIO"))
+                    print(f"::notice::hoja {ws.title} encabezado: {[c for c in enc if c][:20]}")
+                    i_cod = next((enc.index(c) for c in ("DPMP", "COD_MPIO", "MPIO") if c in enc))
                     i_anio = next(i for i, c in enumerate(enc) if c.startswith("AÑO") or c == "ANO")
                     i_area = next((i for i, c in enumerate(enc) if "ÁREA" in c or "AREA" in c), None)
                     i_tot = next((i for i, c in enumerate(enc) if c.startswith("TOTAL")), None)
@@ -65,7 +66,12 @@ def leer(xlsx):
                 continue
             if cod is None or anio is None or tot is None or "total" not in area:
                 continue
-            cod = str(cod).split(".")[0].zfill(5)
+            cod = str(cod).split(".")[0].strip()
+            if not cod.isdigit():
+                continue
+            cod = cod.zfill(5)
+            if len(filas) < 3:
+                print(f"::notice::muestra: {[str(c)[:12] for c in fila[:14]]}")
             filas.append((cod, int(float(anio)), int(round(float(tot)))))
         if filas:
             break
