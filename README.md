@@ -8,7 +8,7 @@ Extrae y actualiza datos abiertos de datos.gov.co (API Socrata) para los product
 - `consultas.json`: consultas agregadas (SoQL) que alimentan cada producto.
 - `.github/workflows/catalogo.yml`: catálogo y diccionario, mensual.
 - `.github/workflows/actualizar.yml`: productos, diario.
-- `.github/workflows/termometro.yml`: Termómetro de seguridad (`consultas_seguridad.json` y población DANE), semanal, a `datos/seguridad/`.
+- `.github/workflows/termometro.yml`: Termómetro de seguridad (`consultas_seguridad.json` y población DANE), cada quince días (días 1 y 16), a `datos/seguridad/`.
 - `scripts/termometro_edicion.py`: arma las tablas de cada edición del Termómetro (`datos/ediciones/`).
 - `datos/`: resultados que generan los flujos (no editar a mano).
 

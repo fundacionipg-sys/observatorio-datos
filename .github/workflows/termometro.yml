@@ -1,10 +1,11 @@
 name: Termometro de seguridad
 # Consultas agregadas de delitos (MinDefensa/Policía), incautaciones, erradicación y coca,
-# más la población municipal del DANE. Semanal, a mano o al cambiar las consultas.
+# más la población municipal del DANE. Cada quince días (días 1 y 16), a mano o al cambiar las consultas.
+# Solo actualiza los datos del repositorio: la edición pública se publica después de la aprobación de Andrés.
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 12 * * 1"   # lunes 07:00 hora de Colombia
+    - cron: "0 12 1,16 * *"   # días 1 y 16, 07:00 hora de Colombia
   push:
     paths:
       - consultas_seguridad.json

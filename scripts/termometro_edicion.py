@@ -24,7 +24,7 @@ GOBIERNOS = [  # el mes de agosto se asigna al gobierno entrante (posesión el 7
     ("Santos II", "2014-08", "2018-07"),
     ("Duque", "2018-08", "2022-07"),
     ("Petro", "2022-08", "2026-07"),
-    ("Gobierno 2026-2030", "2026-08", "2030-07"),
+    ("ADLE", "2026-08", "2030-07"),
 ]
 
 
@@ -128,7 +128,9 @@ def main():
                      "ytd": round(ytd, 1), "ytd_anio_ant": round(ytd_ant, 1),
                      "var_ytd_pct": round(100 * (ytd / ytd_ant - 1), 1) if ytd_ant else None,
                      "ult12": round(u12, 1), "prev12": round(p12, 1),
-                     "var_12m_pct": round(100 * (u12 / p12 - 1), 1) if p12 else None})
+                     "var_12m_pct": round(100 * (u12 / p12 - 1), 1) if p12 else None,
+                     "ytd_t": round(ytd / 1000, 1) if k == "incautacion_cocaina" else None,
+                     "ytd_anio_ant_t": round(ytd_ant / 1000, 1) if k == "incautacion_cocaina" else None})
         # comparación por gobiernos: promedio mensual y tasa anual por 100.000
         porg = collections.defaultdict(list)
         for mes, v in mensual[k].items():
