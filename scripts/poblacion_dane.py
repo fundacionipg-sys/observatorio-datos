@@ -63,10 +63,11 @@ def leer(xlsx):
                 if any(c in ("AÑO", "ANO", "AÑO ") for c in celdas) and any(c in ("DPMP", "MPIO", "COD_MPIO") for c in celdas):
                     enc = celdas
                     print(f"::notice::hoja {ws.title} encabezado: {[c for c in enc if c][:20]}")
-                    i_cod = next((enc.index(c) for c in ("DPMP", "COD_MPIO", "MPIO") if c in enc))
+                    i_cods = [enc.index(c) for c in ("DPMP", "COD_MPIO", "MPIO") if c in enc]
+                    i_cod = i_cods[0]
                     i_anio = next(i for i, c in enumerate(enc) if c.startswith("AÑO") or c == "ANO")
                     i_area = next((i for i, c in enumerate(enc) if "ÁREA" in c or "AREA" in c), None)
-                    i_tot = next((i for i, c in enumerate(enc) if c.startswith("TOTAL")), None)
+                    i_tot = next((i for i, c in enumerate(enc) if c.startswith("TOTAL") or c.startswith("POBLACI")), None)
                     if i_tot is None:
                         enc = None
                 continue
@@ -77,8 +78,10 @@ def leer(xlsx):
                 continue
             if cod is None or anio is None or tot is None or "total" not in area:
                 continue
-            cod = str(cod).split(".")[0].strip()
-            if not cod.isdigit():
+            # el código puede estar en DPMP o en MPIO según el archivo: tomar el que sea numérico
+            cod = next((str(fila[i]).split(".")[0].strip() for i in i_cods
+                        if fila[i] is not None and str(fila[i]).split(".")[0].strip().isdigit()), "")
+            if not cod:
                 continue
             cod = cod.zfill(5)
             if len(filas) < 3:
