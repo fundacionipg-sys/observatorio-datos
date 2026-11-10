@@ -1,0 +1,48 @@
+name: Termometro de seguridad
+# Consultas agregadas de delitos (MinDefensa/Policía), incautaciones, erradicación y coca,
+# más la población municipal del DANE. Semanal, a mano o al cambiar las consultas.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 12 * * 1"   # lunes 07:00 hora de Colombia
+  push:
+    paths:
+      - consultas_seguridad.json
+      - scripts/poblacion_dane.py
+      - .github/workflows/termometro.yml
+permissions:
+  contents: write
+jobs:
+  seguridad:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      SOCRATA_KEY_ID: ${{ secrets.SOCRATA_KEY_ID }}
+      SOCRATA_KEY_SECRET: ${{ secrets.SOCRATA_KEY_SECRET }}
+      SOCRATA_TIMEOUT: "300"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Consultas de seguridad
+        run: python -u extractor_datosgov.py consultas --config consultas_seguridad.json --salida datos/seguridad
+      - name: Población municipal DANE
+        continue-on-error: true
+        run: |
+          pip install -q openpyxl
+          python -u scripts/poblacion_dane.py --salida datos/seguridad
+      - name: Resumen como anotaciones
+        if: always()
+        run: |
+          [ -f datos/seguridad/_registro.csv ] && while IFS= read -r l; do echo "::notice::${l:0:250}"; done < datos/seguridad/_registro.csv
+          for f in datos/seguridad/qc_*.csv; do [ -f "$f" ] && echo "::notice::$(basename $f): $(tr '\n' ' ' < $f | head -c 400)"; done
+      - name: Guardar resultados
+        if: always()
+        run: |
+          git config user.name "observatorio-bot"
+          git config user.email "observatorio-bot@users.noreply.github.com"
+          git add datos/ || true
+          git diff --cached --quiet || git commit -m "Termómetro de seguridad $(date -u +%F)"
+          RAMA="${GITHUB_REF_NAME}"
+          for i in 1 2 3 4; do git pull --rebase -q origin "$RAMA" && git push origin "HEAD:$RAMA" && break; sleep $((i*5)); done
