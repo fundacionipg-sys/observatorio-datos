@@ -4,12 +4,13 @@ Salida: datos/seguridad/poblacion_municipal.csv con cod_muni, anio, poblacion (�
 Busca los enlaces .xlsx en la página de proyecciones del DANE y prueba también rutas conocidas.
 Uso: python scripts/poblacion_dane.py --salida datos/seguridad
 """
-import argparse, csv, io, os, re, sys, urllib.request
+import argparse, csv, io, os, re, sys, urllib.error, urllib.request
 
 PAGINAS = [
     "https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/proyecciones-de-poblacion",
 ]
 CANDIDATOS = [
+    "https://www.dane.gov.co/files/censo2018/proyecciones-de-poblacion/Municipal/DCD-area-proypoblacion-Mun-2005-2017_VP.xlsx",
     "https://www.dane.gov.co/files/censo2018/proyecciones-de-poblacion/Municipal/PPED-AreaMun-2018-2042_VP.xlsx",
     "https://www.dane.gov.co/files/censo2018/proyecciones-de-poblacion/Municipal/PPED-AreaMun-1985-2017_VP.xlsx",
     "https://www.dane.gov.co/files/censo2018/proyecciones-de-poblacion/Municipal/PPED-AreaMun-2020-2035_VP.xlsx",
@@ -19,8 +20,16 @@ UA = {"User-Agent": "Mozilla/5.0 (IpG-Observatorio)"}
 
 
 def bajar(url):
-    with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=120) as r:
-        return r.read()
+    ultimo = None
+    for intento in range(3):
+        try:
+            with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=180) as r:
+                return r.read()
+        except urllib.error.HTTPError:
+            raise
+        except Exception as e:
+            ultimo = e
+    raise ultimo
 
 
 def enlaces():
@@ -32,7 +41,9 @@ def enlaces():
             print(f"::warning::No pude leer {p}: {e}")
             continue
         for h in re.findall(r'href="([^"]+\.xlsx?)"', html, flags=re.I):
-            if "mun" in h.lower():
+            hl = h.lower()
+            # solo totales por área municipal (no sexo-edad ni pertenencia étnica)
+            if ("areamun" in hl or "area-proypoblacion-mun" in hl) and "sexo" not in hl and "etnic" not in hl:
                 u = h if h.startswith("http") else "https://www.dane.gov.co" + ("" if h.startswith("/") else "/") + h
                 vistos.append(u)
     for u in vistos:

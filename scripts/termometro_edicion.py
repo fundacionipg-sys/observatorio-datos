@@ -104,14 +104,11 @@ def main():
             nombres.setdefault(cod, (r.get("municipio", "").title(), r.get("departamento", "").title()))
         mensual[k], municipal[k] = m, mm
 
-    # último mes completo: el mes de la fecha de corte cuenta solo si el corte es el último día
+    # Último mes consolidado: el mes del corte de la fuente se trata como preliminar
+    # (la Policía sigue cargando casos durante semanas), así que se usa el mes anterior.
     def ultimo_completo(k):
-        c = cortes.get(k)
-        if not c:
-            return max(mensual[k])
-        d = dt.date.fromisoformat(c)
-        sig = d + dt.timedelta(days=1)
-        return c[:7] if sig.month != d.month else mes_ant(c[:7])
+        c = cortes.get(k) or max(mensual[k]) + "-01"
+        return mes_ant(c[:7])
 
     filas_mensual, kpis, gob_rows, mapa = [], [], [], []
     for k, arch, col, etq in DELITOS:
